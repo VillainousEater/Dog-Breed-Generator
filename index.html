@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dog Breed Generator by Vincent Bilman</title>
+	
+	<!-- Preconnect Links -->
+	<link href="https://fonts.googleapis.com" rel="preconnect">
+	<link href="https://fonts.gstatic.com" rel="preconnect">
+	
+	<!-- ▼ font links ▼ -->
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&family=Rubik+Scribble&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Rubik+Doodle+Shadow&family=Rubik+Scribble&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Macondo&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comic+Neue:wght@700&family=Gloria+Hallelujah&family=Macondo&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Short+Stack&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+	<!-- ▲ font links ▲ -->
+
+	<style>
+	     body {
+
+	       margin: 20px 50px;
+	       padding-bottom: 20px;
+	       font-family: 'Short Stack', cursive;
+	     }
+
+	     .toggleDesc {
+	       font-size: 18px;
+	     }
+
+	     .section {
+	       margin-bottom: 20px;
+	     }
+
+	     .heading1 {
+	       font-size: 80px;
+	       font-family: 'Rubik Doodle Shadow', system-ui;
+	     }
+
+	     .heading2 {
+	       font-size: 45px;
+	       font-weight: bold;
+	       font-family: 'Rubik Doodle Shadow', system-ui;
+	     }
+
+	     .heading3 {
+	       font-size: 45px;
+	       font-weight: bold;
+	       font-family: 'Rubik Scribble', system-ui;
+	     }
+
+	     .description,
+	     color-description {
+	       font-size: 22px;
+	       color: #555;
+	       margin-bottom: 10px;
+	       line-height: 1.6;
+	     }
+
+	    .headDescription {
+	    display: inline-block; 
+	    margin-right: 10px;
+	       font-size: 22px;
+	       color: #555;
+	       margin-bottom: 10px;
+	       line-height: 1.6;
+	     }
+	     
+	     .explanation,
+	     main {
+	       font-size: 20px;
+	       color: #555;
+	       margin-bottom: 10px;
+	       line-height: 1.6;
+	     }
+
+	     .image-wrap {
+	       display: inline-block;
+
+	       margin: 0 10px;
+
+	       vertical-align: middle;
+
+	     }
+
+	     .result {
+	       font-size: 30px;
+	       margin-bottom: 10px;
+	       line-height: 1.6;
+	       margin-top: 5px;
+	       font-weight: normal;
+	       font-family: 'Luckiest Guy', cursive;
+	       text-indent: 10px;
+	       text-shadow: 1px 1px 10px #32283D;
+	       color: white;
+	     }
+
+	     .result-item {
+	       font-family: 'Short Stack', cursive;
+	       font-size: 22px;
+	       font-weight: bold;
+	     }
+
+	     .container {}
+
+	     .toggleable {}
+
+	     .button {
+	       background-color: #ceff8f;
+	       color: black;
+	       padding: 10px 20px;
+	       border-color: #ceff8f;
+	       border-width: thick;
+	       border-style: outset;
+	       border-radius: 10px;
+	       cursor: pointer;
+	       font-size: 30px;
+	       font-family: 'Rubik Doodle Shadow', system-ui;
+	       font-weight: bold;
+	       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	     }
+
+	     .button:hover {
+	       background-color: #deef7d;
+	       border-color: #deef7d;
+	     }
+
+	     .button:active {
+	       transform: translateY(2px);
+	     }
+
+	     .toggleButton {
+	       background-color: #deef7d;
+	       color: black;
+	       padding: 7px 17px;
+	       border-color: #deef7d;
+	       border-width: thick;
+	       border-style: outset;
+	       border-radius: 10px;
+	       cursor: pointer;
+	       font-size: 27px;
+	       font-family: 'Rubik Doodle Shadow', system-ui;
+	       font-weight: bold;
+	       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	     }
+
+	     .toggleButton:active {
+	       transform: translateY(2px);
+	     }
+
+	     .toggleButton:hover {
+	       background-color: #ebde71;
+	       border-color: #ebde71;
+	     }
+
+	</style>
+</head>
+<body>
+	<!-- ▼▼ welcome start ▼▼-->
+	<div class="section">
+		<p class="heading1">Welcome!</p>
+		<p class="explanation">This is the Dog Breed Generator. It doesn't pick a random existing breed - it helps you generate a completely new breed! This is useful for worldbuilding, be it for creative writing or those who like running tabletop RPG games, or just anyone who will find this fun or useful.<br>
+		<br>
+		The results are as random as technologically possible (xoroshiro128+). Some results may only show up if the generator rolled a specific one, meaning you will only get them under certain conditions. Don't worry, though - these are made to enhance the generator and simulate the real-world rarity of certain traits.<br>
+		<br>
+		Now go a ahead and <em>make that dog!</em> You can also press the <span style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 1); font-family: 'Luckiest Guy', cursive;">&nbsp;&nbsp;R&nbsp;&nbsp;</span> key on your keyboard to generate again!</p>
+		<!-- ▲▲ welcome end ▲▲-->
+		
+		<!-- ▼▼▼ dog button ▼▼▼ -->
+		<button class="button" onclick="generateDog()">&#128062 Make a Dog! &#128062</button>
+	</div>
+	<!-- ▲▲▲ dog button ▲▲▲ -->
+	
+	<!-- ▼▼▼▼ toggle button ▼▼▼▼ -->
+	<p class="toggleDesc"><br>
+	Want to get rid of all these useless words and just view the results?</p><button class="toggleButton" id="toggleButton" onclick="toggleVisibility()">&#10622; Hide Details</button>
+	<p class="toggleDesc">Click the above button (or the <span style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 1); font-family: 'Luckiest Guy', cursive;">&nbsp;&nbsp;E&nbsp;&nbsp;</span> key on your keyboard) to toggle details!</p>
+	<!-- ▲▲▲▲ toggle button ▲▲▲▲ -->
+	
+	<!--▼▼▼▼▼ results start ▼▼▼▼▼--> <div class="section">	
+		<p class="heading3">&#128062 Basics</p>
+		<!-- ▼▼▼▼ primary purpose start ▼▼▼▼-->
+		<p class="result" style="background-color:#ebde71; border-color:#ebde71; border-width: thick; border-style: outset;">Purpose: <span class="result-item" id="list3"></span></p>
+<!-- ▼▼▼▼ toggle start ▼▼▼▼ --> <span class="toggleable">
+		<p class="explanation">A dog breed always has a purpose, and dogs are never purposefully bred without a task in mind. Some dogs are bred to help hunt game, while others are bred to look cute on one's lap. When you roll your breed's purpose, you also get a roll with further specifications in parentheses.<br></p>
+		
+		<!-- hunting -->
+		<p class="description" id="purposeDescHunting"><span style="background-color:#ebde71"><b>Hunting</b><br></span> These dog breed emphasize the dog's biological purpose - hunting prey. They usually help hunters by tracking down prey, retrieving it once the hunter shot it, or finding it in the first place. Smaller breeds can be bred to hunt vermin, such as rats and mice, or flush out burrowing prey like foxes, rabbits, and ferrets.<br></p>
+		
+		<!-- Cattle -->
+		<p class="description" id="purposeDescCattle"><span style="background-color:#ebde71"><b>Cattle</b><br></span> These breeds are made to work in farms. They might herd flocks of sheep, protect livestock from wolves and bears, or stand watch near a chicken coup to prevent fox attacks.<br></p>
+		
+		<!-- Working -->
+		<p class="description" id="purposeDescWorking"><span style="background-color:#ebde71"><b>Working</b><br></span> Although many breeds are called "working", including hunting and cattle breeds, some dogs are bred for actual jobs, sharing employment with their owners. These dogs include police dogs, house guards and watchdogs, war dogs, sled dogs, and the like.<br></p>
+		
+		<!-- Companion -->
+		<p class="description" id="purposeDescCompanion"><span style="background-color:#ebde71"><b>Companion</b><br></span> You might think dog breeds without an explicit purpose exist when you look at dogs who were bred to look cute and nothing more. However, this is a purpose just like any other. Companion dogs can be bred for their affinity for sleeping peacefully on your lap or for their excitement for sports and tricks. Guide dogs and service dogs are companions who protect their owners, and if your setting is a bit on the fantastical side, dogs can be bred as mounts for little folk (or perhaps be bred to a horse's proportions to serve humans riders).<br></p>
+		<!-- primary purpose end -->
+		
+		<!-- secondary purpose start -->
+		<!-- hunting -->
+		<p class="description" id="secondaryPurposeDescRatter"><span style="background-color:#ebde71"><b>Ratter</b><br></span>A ratter is any dog used for catching and killing rats, mice, and similar vermin. Smaller breeds dig out and obliterate these animals, while larger breeds (or mixes like the lurcher) are likelier to catch up to fleeing prey.</p>
+		<p class="description" id="secondaryPurposeDescScenthound"><span style="background-color:#ebde71"><b>Scenthound</b><br></span>A breed that primarily hunts by scent rather than sight, and specialize in following scent or smells (thus also called trackers). They are generally regarded as having some of the most sensitive noses among dogs. They can either be bred to take down the prey they find or to simply help the hunter track it down. Tracking dogs also help in finding missing items and persons.</p>
+		<p class="description" id="secondaryPurposeDescSighthound"><span style="background-color:#ebde71"><b>Sighthound</b><br></span>Also called gazehounds, they hunt primarily by sight and speed. These dogs specialize in pursuing prey, keeping it in sight, and overpowering it by their great speed and agility. They must be able to detect motion quickly, so they have keen vision. Sighthounds must be able to capture fast, agile prey, such as deer (for large dogs) or hares (for small dogs).</p>
+		<p class="description" id="secondaryPurposeDescRetriever"><span style="background-color:#ebde71"><b>Retriever</b><br></span>These breeds retriever game for a hunter who already killed it from afar, such as via gun or bow. Retrievers were bred to retrieve prey without damage, and are thus bred for soft mouths and a great willingness to please, learn, and obey.</p>
+		<p class="description" id="secondaryPurposeDescPointer"><span style="background-color:#ebde71"><b>Pointer</b><br></span>The name pointer comes from the dog's instinct to point, by stopping and aiming its muzzle towards game. This demonstrates to the hunter the location of their quarry and allows them to move into range.</p>
+		<p class="description" id="secondaryPurposeDescWaterdog"><span style="background-color:#ebde71"><b>Water Dog</b><br></span>A hunting breed specialized in squatic prey, usually bred to flush and retrieve game from water. These are very active dogs; their most distinctive feature are their tight waterproof coats and their strong desire to swim. Also called flushing dogs, they might also be utilized for "flushing" prey into the hunting range of the hunter.</p>
+		
+		<!-- cattle -->
+		<p class="description" id="secondaryPurposeDescHerding"><span style="background-color:#ebde71"><b>Herding</b><br></span>Also known as a stock dog, shepherd dog, sheep dog, and more. Herding is actually just a modified form of hunting; these dogs have been bred to recognize cattle as prey and activate their hunting instincts, but not to harm the animals. Bigger dogs guide livestock with their imposing presence, while smaller dogs (like the Corgi) nip on the ankles to let the animals know they are going the wrong way.</p>
+		<p class="description" id="secondaryPurposeDescGuardian"><span style="background-color:#ebde71"><b>Guardian</b><br></span>A livestock guardian dog, shortened to LGD, is bred for the purpose of protecting livestock from predators. They stay with the group of animals they protect as a full-time member of the flock or herd. Unlike herding dogs which control the movement of livestock, LGDs blend in with them, watching for intruders within the flock. The mere presence of a guardian dog is usually enough to ward off some predators, but most are willing to fight any intruders, be it a fox who snuck into the coop (for smaller dogs) or a wolf looking for a snack (for bigger dogs).</p>
+		
+		<!-- working -->
+		<p class="description" id="secondaryPurposeDescAttackdog"><span style="background-color:#ebde71"><b>Attack Dog</b><br></span>Simply put, this is a dog trained to attack a target on command, sight, or inferred provocation. Dogs trained to engage intruders or predators are guard dogs; dogs trained to <em>destroy</em> are attack dogs. Some people like to have a dog that will attack anyone they will them to, but won't otherwise be on guard; others like to watch dogs attack each other.</p>		
+		<p class="description" id="secondaryPurposeDescGuarddog"><span style="background-color:#ebde71"><b>Guard Dog</b><br></span>These breeds are used to watch for and attack any unwanted intruders, be it to protect people, property, or animals. The dogs will bark, howl, or otherwise let a loud alarm to alert the owner of the intrusion. A guard dog is not afraid to enter a physical confrontation!</p>
+		<p class="description" id="secondaryPurposeDescWatchdog"><span style="background-color:#ebde71"><b>Watchdog</b><br></span>Watchdogs watch out for any unwanted intrusions or unexpeted intruders, human or otherwise. Their purpose is not to fight the intrusion, but to alert everyone involved of it, even if it means sprinting around a large house to make sure no room is left where anyone is still asleep.</p>
+		<p class="description" id="secondaryPurposeDescWardog"><span style="background-color:#ebde71"><b>War Dog</b><br></span>A breed used specifically in war. It can be for any purpose, be it for stealthy messaging by sending a small dog between tight alleys, or supporting soldiers in battle. They don't have to be attack dogs; they can transport supplies, medicine, and even act as watch dogs that guard the flanks.</p>
+		<p class="description" id="secondaryPurposeDescSleddog"><span style="background-color:#ebde71"><b>Sled Dog</b><br></span>These dogs are bred and trained to pull a land vehicle in harness, most commonly a sled over snow, hence the name. They are strong enough to haul people, animals, and supplies, up to the breed's capacity. Smaller dogs might be used by tiny people as carriage pullers, and bigger dogs pull sleds to this day.</p>
+		
+		<!-- companion -->
+		<p class="description" id="secondaryPurposeDescSporting"><span style="background-color:#ebde71"><b>Sporting</b><br></span>In the real world, the "sporting group" includes all gun dogs. In this generator, this result refers to any dogs whom people breed for sports entertainment, such as agility contests, or various ball games. These dogs would posses great physique and require a very active lifestyle, but they would also be friendly, sociable, and aim to please.</p>
+		<p class="description" id="secondaryPurposeDescLapdog"><span style="background-color:#ebde71"><b>Lapdog</b><br></span>Though these dogs tend to be small enough to fit in a human's lap, it doesn't mean they have to <em>fit</em> in anyone's lap to be a lapdog in this generator! Any dog that is comfortable to contain in one's lap, be it for a human or a giant, and who is <em>temperamentally predisposed</em> to doing so, is a lap dog.</p>
+		<p class="description" id="secondaryPurposeDescAssistance"><span style="background-color:#ebde71"><b>Assistance</b><br></span>Not a specific breed in the real world, these are dogs who have been trained to help people with disabilities; service dogs. A breed to be entirely made for assistance means there is either a prevalent problem that is most effectively solved by dogs, or there is prevalent enough will to solve such a problem.</p>
+		<p class="description" id="secondaryPurposeDescMount"><span style="background-color:#ebde71"><b>Mount</b><br></span>In the real world, dogs are not anatomically designed to carry the weight of a human on their backs, but it doesn't mean they can't be bred to do so. Perhaps a giant, stocky breed can serve as mounts for humans, or maybe tiny dogs can serve as terrifying war mounts for mouse-sized folk.</p>
+		<!-- toggle end --> </span> 
+		<!-- secondary purpose end -->
+		
+		<!-- body type start -->
+		<p class="result" style="background-color:#f4cd6b; border-color:#f4cd6b; border-width: thick; border-style: outset;">Body: <span class="result-item" id="list2"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Also called conformation, this result dictates the dog's body type. It defines the general proportions, the bone structure and length, joint angulation, musculature, and more. For reasons explained in the Head section, the body shape parameter does not extend to the shape of the dog's head.<br></p>
+		<p class="description" id="bodyDescMesomorph"><span style="background-color:#f4cd6b"><b>Mesomorph</b><br></span> <img src="https://i.postimg.cc/gjFXF3WT/dog-body-mesomorph-xs.png"><br>
+		The most common body type, mesomorphs are generally all-around balanced, seen in working dogs and companions alike.<br></p>
+		<p class="description" id="bodyDescEctomorph"><span style="background-color:#f4cd6b"><b>Ectomorph</b><br></span> <img src="https://i.postimg.cc/dtFk5Rn7/dog-body-ectomorph-xs.png"><br>
+		These dogs are long and light, and usually have defined curvature. Their bodies are thin and at times, they look like they might be picked up by the wind.<br></p>
+		<p class="description" id="bodyDescEndomorph"><span style="background-color:#f4cd6b"><b>Endomorph</b><br></span> <img src="https://i.postimg.cc/BZHP5759/dog-body-endomorph-xs.png"><br>
+		Stocky and tough, endomorphs have short, strong bones, and defined musculature. They often give off a feeling of great power.<br></p>
+		 <!-- toggle end --> </span>
+		<!-- body type end -->
+		
+		<!-- weight start -->
+		<p class="result" style="background-color:#f9bc6a; border-color:#f9bc6a; border-width: thick; border-style: outset;">Size: <span class="result-item" id="list1"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Dog size is decided by its weight rather than dimensions. This means that a dog might be very short due to its legs, but still be considered medium or large if the breed has a heavy build. For example, Corgis are sometimes mistaken for small dogs because they don't reach the knees in height; truth is, they are medium dogs, heavy and stocky.</p>
+		<p class="description" id="sizeDescSmall"><span style="background-color:#f9bc6a"><b>Small</b> (less than 10 kg)<br></span> These dogs might be mistaken for lapdogs or loving companions, but rest assured they can work in hunting and guarding just as well as larger breeds, be it tearing apart rats in their very warrens or painfully biting an intruder's heel as fiercly as a snake. Often misunderstood, smaller breeds make up for their innate anxiety by vocally expressing every discomfort. These breeds need more affection and stricter training alike, for any imbalance of the two will lead to a troubled relationship.<br></p>
+		<p class="description" id="sizeDescMedium"><span style="background-color:#f9bc6a"><b>Medium</b> (11 to 26 kg)<br></span> These dogs often make the best companions, having the best of all worlds in their average-sized body. They can be carried around but aren't too small to notice under one's feet; their mass lends them more power but they aren't as inclined to use it defensively; they can play with any size with little fear of harm on any side.<br></p>
+		<p class="description" id="sizeDescLarge"><span style="background-color:#f9bc6a"><b>Large</b> (27 to 45 kg)<br></span> The most common size for dogs, these breeds can be amazing hunters and guardians, or they can be a perfect cuddle buddy to couch potatoes such as them. They are gentle but strong, and many large breeds are aware of their strength - though that doesn't mean they are excempt from behvaioral mistakes during excitement. Still, even the laziest large breeds need constant excercise.<br></p>
+		<p class="description" id="sizeDescGiant"><span style="background-color:#f9bc6a"><b>Giant</b> (more than 45 kg)<br></span> Thick legs break through ice, huge teeth snapping down on a fish below. Lumbering footsteps shake the entire house as a muscular body jumps down the stairs, ready to greet an intruder. The truly giant breeds are a challenge even to the most experienced owners, be it due to the dangers of a bad temperament or the massive amount of resources required to keep such dogs. These truly gentle, truly giants require a lot of space to sleep, a lot of time to excersice, a lot of food to eat, a lot of disicpline to teach, and a lot of love to give.</p>
+		<!-- toggle end --> </span> 
+	<!-- weight end -->
+	
+	</div>  <!-- basics end -->
+	
+	<!-- coat start -->
+	<div class="section">
+		<p class="heading3">&#128062 Coat</p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Dogs demonstrate an enormous diversity in coat length and texture, from the very short and smooth coat seen in the vizslas, to the wiry coat of a Scottish Terrier and the corded coat of the Puli and the Komondor.</p>
+		<!-- toggle end --> </span> 
+		
+		<!-- coat length start -->
+		<p class="result" style="background-color:#fbac6d; border-color:#fbac6d; border-width: thick; border-style: outset;">Length: <span class="result-item" id="coatLength"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="description" id="coatLengthDescHairless"><img src="https://i.postimg.cc/zGdYPDzM/dog-fur-hairless-xs.png"><br>
+		The reason why the length of the coat is generated first? Hairless dogs! Breeds like the Peruvian Hairless don't have a double or a single coat - they just don't have it at all! Ah, but hairless dogs always come with a haired variety, like the Xoloitzcuintle or the Chinese Crested.<br>
+		<br>
+		Of course, if you want a <em>completely</em> hairless dog, I recommend you ignore the the "<span style="background-color:#f99d73"><b>Type</b></span>" and "<span style="background-color:#f38f7a"><b>Texture</b></span>" sections and skip straight to the "<span style="background-color:#ea8381"><b>Pattern</b></span>" section.</p>
+		<p class="description" id="coatLengthDescCrested"><img src="https://i.postimg.cc/V6x7Hp02/dog-fur-crested-xs.png"><br>
+		A very unique type of fur, crested dogs have hair on the tail ("plume"), feet ("socks"), and head ("crest"), but nowhere else. In real life, only the Chinese Crested have such unique plummage, with other hairless dogs having only slight patches of fur, like a sphynx cat does.</p>
+		<p class="description" id="coatLengthDescShort"><img src="https://i.postimg.cc/rm0njMsS/dog-fur-short-xs.png"><br>
+		Short coats are the most popular among companion breeds, as they require the least maintenance. They might or might not shed, but are definitely not as much of a problem as some long-furred, double-coated breeds!</p>
+		<p class="description" id="coatLengthDescMedium"><img src="https://i.postimg.cc/T2bNWdZx/dog-fur-medium-xs.png"><br>
+		Medium-coated breeds typically have fur that is about an inch long. With this dog coat type, the fur may stand slightly off the body, which could give a fluffier appearance.</p>
+		<p class="description" id="coatLengthDescLong"><img src="https://i.postimg.cc/c4N97qSn/dog-fur-long-xs.png"><br>
+		Long coated dogs usually showcase the most dramatic coifs, and can have hair so long that it sometimes reaches the floor!</p>
+		<p class="description" id="coatLengthDescPowderpuff"><img src="https://i.postimg.cc/nrqd82vr/dog-fur-powderpuff-xs.png"><br>
+		Dogs with this type of fur have their bodies covered and faces bald. Just like the crested fur variety, only the Chinese Crested shows this type of fur growth pattern in the real world.<br></p>
+		<!-- toggle end --> </span> 
+		<!-- coat length end -->
+		
+		<!-- coat type start -->
+		<p class="result" style="background-color:#f99d73; border-color:#f99d73; border-width: thick; border-style: outset;">Type: <span class="result-item" id="coatType"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Dog coats don’t just differ in terms of color, texture, and length. They can also be divided into two categories: single coat and double coat.<br>
+		<br>
+		A double coat, like that of the Newfoundland and most livestock guardian dogs, is referred to as a fur coat, while a single coat, like that of the Poodle, is referred to as a hair coat.</p>
+		<p class="description" id="coatTypeDescSingle"><span style="background-color:#f99d73"><b>Single Coat</b><br></span> Single coated dogs are those with only one layer of fur, which is often referred to as hair instead. The coat is dense and the hair can be any length or texture. Dogs with a single coat are better equipped to handle warmer weather as their lack of an undercoat limits their insulation. A coat might be necessary for these dogs in cold winter climates.</p>
+		<p class="description" id="coatTypeDescDouble"><span style="background-color:#f99d73"><b>Double Coat</b><br></span> A type of coat that consists of two layers, double coated dogs have a dense undercoat of short hairs (woolly in texture) under a top coat of longer hairs called guard hairs. When a dog appears to be fluffier, it means he has a denser undercoat.</p>
+		<!-- toggle end --> </span> 
+		<!-- coat type end -->
+		
+		<!-- coat texture start -->
+		<p class="result" style="background-color:#f38f7a; border-color:#f38f7a; border-width: thick; border-style: outset;">Texture: <span class="result-item" id="coatTexture"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Some breeds have more than one texture type, such as the griffon dog. If you generate multiple textures, they will gain descriptors that tell you how often they manifest, and whether or not some of them are not supposed to manifest according to breed standard.<br>
+		<br>
+		&bull; <b>Standard.</b> This is the most common texture of the breed, and is considered the breed standard.<br>
+		&bull; <b>Alternative.</b> This texture happens commonly as a result of a mutation. It is not as common as the standard texture, but it is known widely nonetheless.<br>
+		&bull; <b>Uncommon.</b> This texture results from a recessive gene, and although it is qualified for the breed standard, it is not often seen. Two parents of this texture will probably yield a litter of the same texture.<br>
+		&bull; <b>Rare.</b> More than just a recessive gene, it takes heavy breeding to achieve this texture, which is qualified for the breed standard nonetheless. Even if both parents have this texture, the litter might not show it.<br>
+		&bull; <b>Non-standard.</b> Whether common or not, this texture is not the breed's standard, and even a purebred dog is disqualified if they show this texture.<br></p>
+		
+		<p class="description" id="coatTextureDescCords"><span style="background-color:#f38f7a"><b>Cords.</b></span> These dogs are often covered with ropes of hair that may reach the floor. “Cords” are long strands of interwoven hair with a core of live hair. The cords form naturally because the dog’s course, wavy or curly outer coat traps the soft wooly undercoat, which forms the cords.</p>
+		<p class="description" id="coatTextureDescCurly"><span style="background-color:#f38f7a"><b>Curly.</b></span> The swirls, curlicues, and twists on curly coated dog breeds can range from tight ringlets to pronounced curls. Long-haired dogs with slight waves in their fur (think Golden Retrievers) wouldn’t be considered curly coated. But when the waves become more pronounced, you’ve entered curly dog coat territory.</p>
+		<p class="description" id="coatTextureDescRough"><span style="background-color:#f38f7a"><b>Rough.</b></span> What most distinguishes a rough coat from other dog coat types is texture. Rough coats can be either medium length or long, but they are always coarse to the touch.</p>
+		<p class="description" id="coatTextureDescSilky"><span style="background-color:#f38f7a"><b>Silky.</b></span> You know (and envy) these dogs when you see them. Their coats flow and cascade with the glossy sheen of a model in a shampoo commercial.</p>
+		<p class="description" id="coatTextureDescSmooth"><span style="background-color:#f38f7a"><b>Smooth.</b></span> Smooth coats are usually short, with silky hair that lays close to the body. If a dog with longer hair is "smooth", then it usually refers to a shorter variety of a longer coat, or a less-coarse variety of an otherwise rough coat. Alternatively, a smooth coat on a long-haired dog might refer to the way some parts of the coat hug the body more tightly.</p>
+		<p class="description" id="coatTextureDescWavy"><span style="background-color:#f38f7a"><b>Wavy.</b></span> Not quite curly, not quite smooth - wavy coats look like the surface of gentle seas. The waves can be apparant even in shorter fur, especially on the back, which causes the dog's raised hackles to appear wavy as well!</p>
+		<p class="description" id="coatTextureDescWire"><span style="background-color:#f38f7a"><b>Wire.</b></span> Wire coated (also called broken coated) dogs have fur with a wire-like texture. It is harsh and stiff and stands away from the body, especially on the tail, the back of the legs, and on the face. Wire coated dog breeds often have a dapper, gentlemanly appearance because of their pronounced mustaches, beards, and eyebrows.</p>
+		 <!-- toggle end --> </span>
+		<!-- coat texture end -->
+		
+		<!-- coat pattern start -->
+		<p class="result" style="background-color:#ea8381; border-color:#ea8381; border-width: thick; border-style: outset;">Pattern: <span class="result-item" id="coatPattern"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">A lot of dogs have multiple colors, but just as many have only one. These colors are shown as a pattern on the dog's body - or maybe there is no pattern and the color is flat. Note that the pattern doesn't extend to the dog's head; this is because body and head patterns don't always come together. As such, the head pattern is generated separately - feel free to use the generated head patterns or just decide on one yourself!<br>
+		<br>
+		Either way, some breeds have more than one pattern. If you generate multiple patterns, they will gain descriptors that tell you how often they manifest, and whether or not some of them are not supposed to manifest according to breed standard.<br>
+		<br>
+		&bull; <b>Standard.</b> This is the most common pattern of the breed, and is considered the breed standard.<br>
+		&bull; <b>Alternative.</b> This pattern happens commonly as a result of a mutation. It is not as common as the standard pattern, but it is known widely nonetheless.<br>
+		&bull; <b>Uncommon.</b> This pattern results from a recessive gene, and although it is qualified for the breed standard, it is not often seen. Two parents of this pattern will probably yield a litter of the same pattern.<br>
+		&bull; <b>Rare.</b> More than just a recessive gene, it takes heavy breeding to achieve this pattern, which is qualified for the breed standard nonetheless. Even if both parents have this pattern, the litter might not show it.<br>
+		&bull; <b>Non-standard.</b> Whether common or not, this pattern is not the breed's standard, and even a purebred dog is disqualified if they show this pattern.<br></p>
+		
+		<p class="description" id="coatPatternDescAgouti"><span style="background-color:#ea8381"><b>Agouti</b><br></span> <img src="https://i.postimg.cc/CLM4FbpR/dog-fur-agouti-xs.png"><br>
+		Banded hairs and dark hair tips on the dorsal area and lighter marking on the dog’s underside, muzzle, eyebrows and chest.</p>
+		<p class="description" id="coatPatternDescBelton"><span style="background-color:#ea8381"><b>Belton</b><br></span> <img src="https://i.postimg.cc/2jQHjzqK/dog-fur-belton-xs.png"><br>
+		Also known as ticked, flecked, or speckled, this refers to flecks of color against a white background.</p>
+		<p class="description" id="coatPatternDescBlackback"><span style="background-color:#ea8381"><b>Blackback</b><br></span> <img src="https://i.postimg.cc/VvmW0CSH/dog-fur-blackback-xs.png"><br>
+		This pattern has two colors, with a dark color on most of the body and lighter patches on the belly, legs, chest, face, and eyebrows.</p>
+		<p class="description" id="coatPatternDescBrindle"><span style="background-color:#ea8381"><b>Brindle</b><br></span> <img src="https://i.postimg.cc/9fwp6V51/dog-fur-brindle-xs.png"><br>
+		This pattern of irregular stripes against a lighter background can look somewhat tigerish! Breeds with these coats include Great Danes and Boxers.</p>
+		<p class="description" id="coatPatternDescExtremePiebald"><span style="background-color:#ea8381"><b>Extreme Piebald</b><br></span> <img src="https://i.postimg.cc/wjvFkLwC/dog-fur-extreme-piebald-xs.png"><br>
+		An extensive piebald pattern that renders the dog mostly or all light-colored with pink skin. Usually some pigmented specks remain.</p>
+		<p class="description" id="coatPatternDescFlat"><span style="background-color:#ea8381"><b>Flat</b><br></span> <img src="https://i.postimg.cc/Y0z8d3KH/dog-fur-flat-xs.png"><br>
+		This dog has no pattern; instead, one color governs most or all of its body.</p>
+		<p class="description" id="coatPatternDescHarlequin"><span style="background-color:#ea8381"><b>Harlequin</b><br></span> <img src="https://i.postimg.cc/XNk8SQmM/dog-fur-harlqeuin-xs.png"><br>
+		This pattern is when a light-colored dog has black patches with an uneven border.</p>
+		<p class="description" id="coatPatternDescMantle"><span style="background-color:#ea8381"><b>Mantle</b><br></span> <img src="https://i.postimg.cc/G20QrNbR/dog-fur-mantle-xs.png"><br>
+		Only used to refer to Great Danes in the real world, this pattern includes a dark covering on a light-colored body, like a very big blanket, cape, or hoodie.</p>
+		<p class="description" id="coatPatternDescMerle"><span style="background-color:#ea8381"><b>Merle</b><br></span> <img src="https://i.postimg.cc/52RgKyG6/dog-fur-merle-xs.png"><br>
+		These dog coats appear marbled, with splashes of darker colors against a lighter background.</p>
+		<p class="description" id="coatPatternDescPiebald"><span style="background-color:#ea8381"><b>Piebald</b><br></span> <img src="https://i.postimg.cc/DZqczgzX/dog-fur-piebald-xs.png"><br>
+		White, irregular patches are known as piebald.</p>
+		<p class="description" id="coatPatternDescSaddle"><span style="background-color:#ea8381"><b>Saddle</b><br></span> <img src="https://i.postimg.cc/8c4BRzMk/dog-fur-saddle-xs.png"><br>
+		Also known as a blanket; when a dog has a large patch, usually darker, over the centre of the back.</p>
+		<p class="description" id="coatPatternDescShaded"><span style="background-color:#ea8381"><b>Shaded</b><br></span> <img src="https://i.postimg.cc/YqXzjjtb/dog-fur-shaded-xs.png"><br>
+		When it looks like a shadow is looming over the dog.</p>
+		<p class="description" id="coatPatternDescSpotted"><span style="background-color:#ea8381"><b>Spotted</b><br></span> <img src="https://i.postimg.cc/pXPspgzX/dog-fur-spotted-xs.png"><br>
+		Regular dark brown or black spots on a white background.</p>
+		<p class="description" id="coatPatternDescTuxedo"><span style="background-color:#ea8381"><b>Tuxedo</b><br></span> <img src="https://i.postimg.cc/VL4DMDW9/dog-fur-tuxedo-xs.png"><br>
+		This pattern is when a dog is mostly one color, but has a white patch on its chest, a white spot on its chin, and white on its feet.</p>
+		 <!-- toggle end --> </span>
+		<!-- coat pattern end -->
+		
+		<!-- coat colors start -->
+		<p class="result" style="background-color:#dd7a88; border-color:#dd7a88; border-width: thick; border-style: outset;">Colors: <span class="result-item" id="coatColors"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">You might get more colors than the patterns you generated allow for. That's alright! Many dog breeds have different colors they can come in. For example, labradors have a flat pattern, meaning they don't have any. However, they can come in colors from cream, to gold, to black, red, and seal!</p>
+		<p class="description" id="colorDescBlack">Black Examples:<br>
+		<img src="https://i.postimg.cc/28ZHzyGn/dog-colors-xs-black.png"></p>
+		<p class="description" id="colorDescBlue">Blue Examples:<br>
+		<img src="https://i.postimg.cc/4d283hjQ/dog-colors-xs-blue.png"></p>
+		<p class="description" id="colorDescChocolate">Chocolate Examples:<br>
+		<img src="https://i.postimg.cc/63P0KxGH/dog-colors-xs-choco.png"></p>
+		<p class="description" id="colorDescCream">Cream Examples:<br>
+		<img src="https://i.postimg.cc/qRvb0GD7/dog-colors-xs-cream.png"></p>
+		<p class="description" id="colorDescFadedBlue">Faded Blue Examples:<br>
+		<img src="https://i.postimg.cc/GtBXTmCw/dog-colors-xs-faded-blue.png"></p>
+		<p class="description" id="colorDescFadedChocolate">Faded Chocolate Examples:<br>
+		<img src="https://i.postimg.cc/7hpm3rHC/dog-colors-xs-faded-choco.png"></p>
+		<p class="description" id="colorDescFadedIsabella">Faded Isabella Examples:<br>
+		<img src="https://i.postimg.cc/RC8s5K7M/dog-colors-xs-faded-isa.png"></p>
+		<p class="description" id="colorDescGold">Gold Examples:<br>
+		<img src="https://i.postimg.cc/LsRQQSzL/dog-colors-xs-gold.png"></p>
+		<p class="description" id="colorDescGray">Gray Examples:<br>
+		<img src="https://i.postimg.cc/Zqc71Qcg/dog-colors-xs-gray.png"></p>
+		<p class="description" id="colorDescIsabella">Isabella Examples:<br>
+		<img src="https://i.postimg.cc/hGSMbrB0/dog-colors-xs-isa.png"></p>
+		<p class="description" id="colorDescRed">Red Examples:<br>
+		<img src="https://i.postimg.cc/RFhR2Zq6/dog-colors-xs-red.png"></p>
+		<p class="description" id="colorDescSeal">Seal Examples:<br>
+		<img src="https://i.postimg.cc/L8FxhSQw/dog-colors-xs-seal.png"></p>
+		<p class="description" id="colorDescWhite">White Examples:<br>
+		<img src="https://i.postimg.cc/kGtyXYQ7/dog-colors-xs-white.png"></p> 
+		<!-- toggle end --> </span> 
+		<!-- coat colors end -->
+	</div> <!-- coat end -->
+	
+	<!-- head start -->
+	<div class="section">
+		<p class="heading3">&#128062 Head</p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">The head is generated separately not only due to coat patterns not necessarily extending to it, but also because some dogs who have the same body type and purpose have a different head shape; for example, a Dobermann and an Alapaha Blue Blood Bulldog are both guard dogs, but the Dobermann has a snipey head shape and the Bulldog has a broken-up head shape.</p>
+		<!-- toggle end --> </span> 
+		
+		<!-- face start -->
+		<p class="result" style="background-color:#cd728e; border-color:#cd728e; border-width: thick; border-style: outset;">Face: <span class="result-item" id="headType"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="description" id="headTypeDescBlocky">Head is cube shaped with blunt upturned nose.<br>
+		<img src="https://i.postimg.cc/fySGms4P/face-blocky.png"></p>
+		<p class="description" id="headTypeDescSnipey">Long & thin with a pointed muzzle.<br>
+		<img src="https://i.postimg.cc/MK2BBYVP/face-snipey.png"></p>
+		<p class="description" id="headTypeDescDomed">Round top skull with slight convex of the nose.<br>
+		<img src="https://i.postimg.cc/G3BtqsdW/face-domed.png"></p>
+		<p class="description" id="headTypeDescDown">A deeply convex profile from the top of the skull to the tip of the nose.<br>
+		<img src="https://i.postimg.cc/vm3wdXL0/face-down.png"></p>
+		<p class="description" id="headTypeDescApple">Domed skull with a smaller snout.<br>
+		<img src="https://i.postimg.cc/V6vQsMKm/face-apple.png"></p>
+		<p class="description" id="headTypeDescDish">High set nose with a slightly concave muzzle profile.<br>
+		<img src="https://i.postimg.cc/W3yRd3yr/face-dish.png"></p>
+		<p class="description" id="headTypeDescBroken-up">Upturned nose with a deep stop and an undershot jawline.<br>
+		<img src="https://i.postimg.cc/Qxtb6mHX/face-broken-up.png"></p>
+		<!-- toggle end --> </span> 
+		<!-- face end -->
+		
+		<!-- ears start -->
+		<p class="result" style="background-color:#bb6c92; border-color:#bb6c92; border-width: thick; border-style: outset;">Ears: <span class="result-item" id="headEars"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="description" id="headEarsDescFloppy"><img src="https://i.postimg.cc/vZnM3dJr/dog-ears-lop-xs.png"><br>
+		Can be expressed in a variety of shapes & lengths and specifies only that the ear hang down from their junction with the side of the head.<br></p>
+		<p class="description" id="headEarsDescFolded"><img src="https://i.postimg.cc/YqZM6Ss2/dog-ears-half-xs.png"><br>
+		A semi-erect ear with a front flap that folds forward nearly to the skull obscuring most of the ear canal.<br></p>
+		<p class="description" id="headEarsDescPerky"><img src="https://i.postimg.cc/hGqnY5nH/dog-ears-upright-xs.png"><br>
+		Sharp and pointed ears that stand erect. Can be natural or done by cropping.<br></p>
+		<p class="description" id="headEarsDescAsymmetrical"><img src="https://i.postimg.cc/HL4m19sj/dog-ears-asym-xs.png"><br>
+		No such dog with this breed standard in the real world; this is either the result of weak ear cartilage or mix-breeding (mutts). Still, this is super cute, so feel free to invent such a dog breed!<br></p>
+		<!-- toggle end --> </span> 
+		<!-- ears end -->
+		
+		<!-- nose start -->
+		<p class="result" style="background-color:#a66795; border-color:#a66795; border-width: thick; border-style: outset;">Nose: <span class="result-item" id="headNose"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="description" id="headNoseDescBlack">The most common nose color, most dog breeds have a black nose, regardless of skin color.<br>
+		<img src="https://i.postimg.cc/cCyFYmkZ/nose-black.png"></p>
+		<p class="description" id="headNoseDescChocolate">Some breeds have brown noses, and they are usually so dark that they look black.<br>
+		<img src="https://i.postimg.cc/cJz91ZQv/nose-choco.png"></p>
+		<p class="description" id="headNoseDescBlue">Blue noses are most common in dogs whose fur is predominantly blue, but can also appear in other colors.<br>
+		<img src="https://i.postimg.cc/P52Vc1Jz/nose-blue.png"></p>
+		<p class="description" id="headNoseDescIsabella">An isabella nose is most common in dogs who have light fur, or brown, red, and gold fur, and especially in those with heterochromia. As this generator is random, feel free to mix things up.<br>
+		<img src="https://i.postimg.cc/wTkwyDX8/nose-isa.png"></p>
+		<p class="description" id="headNoseDescIsabellaSpottedBlack">Like isabella, spotted noses are more common in red, gold, and generally light fur, and are more often seen with heterochromia. A nose's spots is usually the same as their darkest fur color, but as this generator is random, feel free to mix things up.<br>
+		<img src="https://i.postimg.cc/FsvPHTJV/nose-spotted-black.png"></p>
+		<p class="description" id="headNoseDescIsabellaSpottedBlue">Like isabella, spotted noses are more common in red, gold, and generally light fur, and are more often seen with heterochromia. A nose's spots is usually the same as their darkest fur color, but as this generator is random, feel free to mix things up.<br>
+		<img src="https://i.postimg.cc/prfqBF3j/nose-spotted-blue.png"></p>
+		<p class="description" id="headNoseDescIsabellaSpottedChocolate">Like isabella, spotted noses are more common in red, gold, and generally light fur, and are more often seen with heterochromia. A nose's spots is usually the same as their darkest fur color, but as this generator is random, feel free to mix things up.<br>
+		<img src="https://i.postimg.cc/wxLfzC3B/nose-spotted-choco.png"></p>
+		<!-- toggle end --> </span> 
+		<!-- nose end -->
+		
+		<!-- eyes start -->
+		<p class="result" style="background-color:#906394; border-color:#906394; border-width: thick; border-style: outset;">Eyes: <span class="result-item" id="headEyes"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">Most dogs’ eyes are various shades of brown. But dogs can have just about any other eye color, too. You’ve not doubt seen huskies with blue eyes, or even one blue and one brown eye (a condition called heterochromia).<br>
+		<br>
+		In this generator, heterochromia can also generate other types of color combinations, and even two of the same color (so you will use different shades). Feel free to ignore the unusual generations and use normal heterochromia if you feel like being realistic!</p>
+		<p class="description" id="headEyesDescBrown"><img src="https://i.postimg.cc/GhbR4R0t/eyes-brown.png"><br>
+		The most common type, but doesn't mean it's any less pretty. You've probably also seen a lot of dogs with "black" eyes, but know that a good shine of light will reveal these are actually just really, <em>really</em> dark brown!</p>
+		<p class="description" id="headEyesDescAmber"><img src="https://i.postimg.cc/SRfpgT9m/eyes-amber.png"><br>
+		Beautiful golden eyes. Some shades of amber and blue can appear close, giving them the illusion of being "green" or "hazel", but this is just a trick of the eye!</p>
+		<p class="description" id="headEyesDescBlue"><img src="https://i.postimg.cc/RC79CFD2/eyes-blue.png"><br>
+		One of the rarer eye colors, it is usually prevalent within a breed rather than being a variety of a breed with other eye colors. It's recessive, so you need to work hard to get it right!</p>
+		<!-- toggle end --> </span> 
+		<!-- eyes end -->
+		
+		<!-- face pattern start -->
+		<p class="result" style="background-color:#795f91; border-color:#795f91; border-width: thick; border-style: outset;">Pattern: <span class="result-item" id="headPatterns"></span></p>
+		<!-- toggle start --> <span class="toggleable">
+		<p class="explanation">This part generates between one and three head patterns! Dog head patterns are very numerous, and as such, much harder to categorize than body patterns. Feel free to mix the resulting patterns together; these are more of a suggestion than a rule!<br></p>
+		<p class="headDescription" id="headPatternsDescAgouti"><img src="https://i.postimg.cc/fLQVfWGK/head-pattern-agouti.png"></p>
+		<p class="headDescription" id="headPatternsDescAsymmetrical"><img src="https://i.postimg.cc/85bzdRBp/head-pattern-asym.png"></p>
+		<p class="headDescription" id="headPatternsDescBandit"><img src="https://i.postimg.cc/FFZY04Dy/head-pattern-bandit.png"></p>
+		<p class="headDescription" id="headPatternsDescFlat"><img src="https://i.postimg.cc/fLWXYqcR/head-pattern-flat.png"></p>		
+		<p class="headDescription" id="headPatternsDescBelton"><img src="https://i.postimg.cc/s2hBWGNx/head-pattern-belton.png"></p>
+		<p class="headDescription" id="headPatternsDescBlackback"><img src="https://i.postimg.cc/vTq8kGNC/head-pattern-blackback.png"></p>
+		<p class="headDescription" id="headPatternsDescBrindle"><img src="https://i.postimg.cc/5ynjJB67/head-pattern-brindle.png"></p>
+		<p class="headDescription" id="headPatternsDescChimera"><img src="https://i.postimg.cc/QdBVLWsm/head-pattern-chimeric.png"></p>
+		<p class="headDescription" id="headPatternsDescDiamond"><img src="https://i.postimg.cc/zG3HJcwn/head-pattern-diamond.png"></p>
+		<p class="headDescription" id="headPatternsDescHat"><img src="https://i.postimg.cc/vHY6KBc2/head-pattern-hat.png"></p>
+		<p class="headDescription" id="headPatternsDescLozenge"><img src="https://i.postimg.cc/W3V4JWZY/head-pattern-lozenge.png"></p>
+		<p class="headDescription" id="headPatternsDescMask"><img src="https://i.postimg.cc/fbmLynV0/head-pattern-mask.png"></p>
+		<p class="headDescription" id="headPatternsDescMerle"><img src="https://i.postimg.cc/9Qv0cFQh/head-pattern-merle.png"></p>
+		<p class="headDescription" id="headPatternsDescNose"><img src="https://i.postimg.cc/3JxdBccP/head-pattern-nose-mask.png"></p>
+		<p class="headDescription" id="headPatternsDescSable"><img src="https://i.postimg.cc/5yNNsXnw/head-pattern-sable.png"></p>
+		<p class="headDescription" id="headPatternsDescShaded"><img src="https://i.postimg.cc/qvYhgxQW/head-pattern-shaded.png"></p>
+		<p class="headDescription" id="headPatternsDescSki"><img src="https://i.postimg.cc/fT80QNdz/head-pattern-ski-mask.png"></p>
+		<p class="headDescription" id="headPatternsDescSkunk"><img src="https://i.postimg.cc/ncSMw18M/head-pattern-skunk.png"></p>
+		<p class="headDescription" id="headPatternsDescSleepless"><img src="https://i.postimg.cc/ZRPC7tZh/head-pattern-sleepless.png"></p>
+		<p class="headDescription" id="headPatternsDescTicked"><img src="https://i.postimg.cc/brzd4CNS/head-pattern-ticked.png"></p>
+		<!-- toggle end -->	</span> 
+			<!-- face pattern end -->
+			
+	</div> <!-- head end -->
+	
+	<!-- results end-->
+	
+	<script src="script.js">
+	</script>
+</body>
+</html>
